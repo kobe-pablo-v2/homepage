@@ -11,7 +11,7 @@ const app = new Hono<Env>();
 
 app.use("*", cors());
 
-app.get("/", (c) => {
+app.get("/hello", (c) => {
 	return c.text("Hello Hono!");
 });
 
