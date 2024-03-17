@@ -1,13 +1,18 @@
 {
-  "scripts": {
-    "dev": "wrangler dev src/index.ts",
-    "deploy": "wrangler deploy --minify src/index.ts"
-  },
-  "dependencies": {
-    "hono": "^4.1.1"
-  },
-  "devDependencies": {
-    "@cloudflare/workers-types": "^4.20240208.0",
-    "wrangler": "^3.32.0"
-  }
+	"scripts": {
+		"dev": "wrangler dev src/index.ts",
+		"deploy": "wrangler deploy --minify src/index.ts",
+		"format": "npx @biomejs/biome format . --write",
+		"lint": "npx @biomejs/biome lint src"
+	},
+	"dependencies": {
+		"hono": "^4.1.1",
+		"drizzle-orm": "^0.29.4"
+	},
+	"devDependencies": {
+		"drizzle-kit": "^0.20.14",
+		"@biomejs/biome": "1.6.1",
+		"@cloudflare/workers-types": "^4.20240208.0",
+		"wrangler": "^3.32.0"
+	}
 }
