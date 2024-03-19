@@ -7,6 +7,7 @@ export const ArticleSchema = sqliteTable("articles", {
 		.notNull(),
 	title: text("title").notNull(),
 	content: text("content").notNull(),
+	imageUrl: text("image_url").notNull(),
 	createdAt: integer("created_at", { mode: "timestamp" })
 		.default(sql`CURRENT_TIMESTAMP`)
 		.notNull(),
