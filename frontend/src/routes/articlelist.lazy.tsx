@@ -52,7 +52,7 @@ function ArticleList(_props: any) {
 					<p>Created At: {article.createdAt}</p>
 				</div>
 			))}
-		</div
+		</div>
 	);
 }
 
