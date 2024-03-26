@@ -60,7 +60,7 @@ function ArticleList(_props: any) {
 	}));
 
 	return (
-		<div className="bg-black text-white h-full py-10 pb-[305px]">
+		<div className="bg-black text-white absolute inset-0 w-full">
 			<div className="container mx-auto px-4">
 				<HoverEffect items={items} />
 				<div className="flex justify-center mt-8">
