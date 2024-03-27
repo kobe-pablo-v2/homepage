@@ -60,31 +60,31 @@ function ArticleList(_props: any) {
 	}));
 
 	return (
-		<div className="bg-black text-white absolute inset-0 w-full">
-			<div className="container mx-auto px-4">
+		<div className="bg-black text-white min-h-screen flex flex-col">
+			<div className="container mx-auto px-4 flex-grow size-2/4">
 				<HoverEffect items={items} />
-				<div className="flex justify-center mt-8">
-					<ReactPaginate
-						pageCount={Math.ceil(articles.length / perPage)}
-						marginPagesDisplayed={2}
-						pageRangeDisplayed={5}
-						onPageChange={handlePageChange}
-						containerClassName="inline-flex space-x-2"
-						pageClassName="mx-2"
-						pageLinkClassName="px-3 py-2 border-zinc-400 text-zinc-400 hover:bg-zinc-400 hover:text-black focus:outline-none"
-						activeClassName="border-b-2 border-zinc-400"
-						previousLabel="PREV"
-						nextLabel="NEXT"
-						previousClassName="mx-2"
-						nextClassName="mx-2"
-						previousLinkClassName="px-3 py-2 text-zinc-400 hover:bg-zinc-400 hover:text-black focus:outline-none rounded-lg"
-						nextLinkClassName="px-3 py-2 text-zinc-400 hover:bg-zinc-400 hover:text-black focus:outline-none rounded-lg"
-						disabledClassName="opacity-50 cursor-not-allowed"
-						breakLabel="..."
-						breakClassName="mx-2"
-						breakLinkClassName="px-3 py-2 border border-white text-white hover:bg-white hover:text-black focus:outline-none"
-					/>
-				</div>
+			</div>
+			<div className="flex justify-center items-center py-8">
+				<ReactPaginate
+					pageCount={Math.ceil(articles.length / perPage)}
+					marginPagesDisplayed={2}
+					pageRangeDisplayed={5}
+					onPageChange={handlePageChange}
+					containerClassName="inline-flex space-x-2"
+					pageClassName="mx-2"
+					pageLinkClassName="px-3 py-2 border-zinc-400 text-zinc-400 hover:bg-zinc-400 hover:text-black focus:outline-none"
+					activeClassName="border-b-2 border-zinc-400"
+					previousLabel="PREV"
+					nextLabel="NEXT"
+					previousClassName="mx-2"
+					nextClassName="mx-2"
+					previousLinkClassName="px-3 py-2 text-zinc-400 hover:bg-zinc-400 hover:text-black focus:outline-none rounded-lg"
+					nextLinkClassName="px-3 py-2 text-zinc-400 hover:bg-zinc-400 hover:text-black focus:outline-none rounded-lg"
+					disabledClassName="opacity-50 cursor-not-allowed"
+					breakLabel="..."
+					breakClassName="mx-2"
+					breakLinkClassName="px-3 py-2 border border-white text-white hover:bg-white hover:text-black focus:outline-none"
+				/>
 			</div>
 		</div>
 	);
