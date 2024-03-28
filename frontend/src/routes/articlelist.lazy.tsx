@@ -69,13 +69,13 @@ function ArticleList(_props: any) {
 	}));
 
 	return (
-		<div className="bg-black text-white min-h-screen flex-col">
+		<div className="bg-black text-white min-h-screen flex flex-col">
 			{/*記事一覧*/}
 			<div className="container mx-auto px-4 flex-grow size-2/4">
 				<HoverEffect items={items} />
 			</div>
 			{/*ページネーション*/}
-			<div className="flex justify-center py-8 ">
+			<div className="flex justify-center items-center py-8 ">
 				<ReactPaginate
 					pageCount={Math.ceil(articles.length / perPage)}
 					marginPagesDisplayed={2}
