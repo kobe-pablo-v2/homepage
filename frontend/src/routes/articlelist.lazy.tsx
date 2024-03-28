@@ -7,6 +7,7 @@ export const Route = createLazyFileRoute("/articlelist")({
 	component: ArticleList,
 });
 
+// 記事の形付け
 interface Article {
 	id: number;
 	title: string;
@@ -15,43 +16,51 @@ interface Article {
 	createdAt: string;
 }
 
+// 記事の一覧を取得する
 async function fetchData(): Promise<Article[]> {
 	try {
 		const response = await fetch("http://127.0.0.1:8787/articles", {
 			method: "GET",
 			headers: {
-				"Content-Type": "application/json", // JSON形式のデータを受け取る
+				"Content-Type": "application/json",
 			},
 		});
 		if (response.ok) {
-			return await response.json(); // JSON形式のデータをオブジェクトとして取得する
+			return await response.json();
 		} else {
 			throw new Error("Request failed");
 		}
 	} catch (error) {
 		console.error(error);
-		return []; // エラーが発生した場合は空の配列を返す
+		return [];
 	}
 }
 
 function ArticleList(_props: any) {
 	const [articles, setArticles] = useState<Article[]>([]);
 	const [currentPage, setCurrentPage] = useState(0);
+
+	// 1ページあたりの表示数
 	const perPage = 6;
 
 	useEffect(() => {
 		fetchData().then((data) => {
 			setArticles(data);
 		});
-	}, []); // 空の配列を渡すことで、最初のマウント時にのみ実行されるようにする
+	}, []);
 
+	// ページネーションページ遷移の処理
 	const handlePageChange = (data: { selected: number }) => {
 		setCurrentPage(data.selected);
 	};
 
+	// ページネーションの範囲を計算
 	const offset = currentPage * perPage;
+
+	//現在のページに表示すべき記事の配列
 	const currentArticles = articles.slice(offset, offset + perPage);
 
+	// 記事一覧のデータを整形
 	const items = currentArticles.map((article) => ({
 		title: article.title,
 		thumbnail: article.imageUrl,
@@ -60,11 +69,13 @@ function ArticleList(_props: any) {
 	}));
 
 	return (
-		<div className="bg-black text-white min-h-screen flex flex-col">
+		<div className="bg-black text-white min-h-screen flex-col">
+			{/*記事一覧*/}
 			<div className="container mx-auto px-4 flex-grow size-2/4">
 				<HoverEffect items={items} />
 			</div>
-			<div className="flex justify-center items-center py-8">
+			{/*ページネーション*/}
+			<div className="flex justify-center py-8 ">
 				<ReactPaginate
 					pageCount={Math.ceil(articles.length / perPage)}
 					marginPagesDisplayed={2}

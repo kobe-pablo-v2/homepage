@@ -17,6 +17,7 @@ app.get("/hello", (c) => {
 	return c.text("Hello Hono!");
 });
 
+// 記事一覧を取得する
 app.get("/articles", async (c) => {
 	const db = drizzle(c.env.DB);
 	const result = await db.select().from(ArticleSchema).all();
