@@ -3,5 +3,5 @@ CREATE TABLE `articles` (
 	`title` text NOT NULL,
 	`content` text NOT NULL,
 	`image_url` text NOT NULL,
-	`created_at` integer DEFAULT CURRENT_TIMESTAMP NOT NULL
+	`created_at` text DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
