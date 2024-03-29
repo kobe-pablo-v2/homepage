@@ -14,7 +14,7 @@
 		"clsx": "^2.1.0",
 		"framer-motion": "^11.0.20",
 		"react": "^18.2.0",
-		"npm install react react-dom": "^18.2.0",
+		"react react-dom": "^18.2.0",
 		"react-element-to-jsx-string": "^15.0.0",
 		"react-paginate": "^8.2.0",
 		"tailwind-merge": "^2.2.2"

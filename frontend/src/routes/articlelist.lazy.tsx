@@ -16,52 +16,73 @@ interface Article {
 	createdAt: string;
 }
 
-// 記事の一覧を取得する
-async function fetchData(): Promise<Article[]> {
+// 記事の一覧を取得する page = 表示しているページ perPage = 1ページあたりの表示数
+async function fetchData(page: number, perPage: number): Promise<Article[]> {
 	try {
-		const response = await fetch("http://127.0.0.1:8787/articles", {
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json",
+		const response = await fetch(
+			`http://127.0.0.1:8787/articles?page=${page}&perPage=${perPage}`,
+			{
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+				},
 			},
-		});
+		);
 		if (response.ok) {
 			return await response.json();
-		} else {
-			throw new Error("Request failed");
 		}
+		throw new Error("Request failed");
 	} catch (error) {
 		console.error(error);
 		return [];
 	}
 }
 
+// 記事の総数を取得する
+async function fetchTotalCount(): Promise<number> {
+	try {
+		const response = await fetch("http://127.0.0.1:8787/articles/count", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+		if (response.ok) {
+			const data = await response.json();
+			return data.total;
+		}
+		throw new Error("Request failed");
+	} catch (error) {
+		console.error(error);
+		return 0;
+	}
+}
+
 function ArticleList(_props: any) {
 	const [articles, setArticles] = useState<Article[]>([]);
-	const [currentPage, setCurrentPage] = useState(0);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [totalCount, setTotalCount] = useState(0);
 
 	// 1ページあたりの表示数
 	const perPage = 6;
 
+	// ページ読み込み時に記事一覧を取得
 	useEffect(() => {
-		fetchData().then((data) => {
+		fetchData(currentPage, perPage).then((data) => {
 			setArticles(data);
 		});
-	}, []);
+		fetchTotalCount().then((count) => {
+			setTotalCount(count);
+		});
+	}, [currentPage]);
 
 	// ページネーションページ遷移の処理
 	const handlePageChange = (data: { selected: number }) => {
-		setCurrentPage(data.selected);
+		setCurrentPage(data.selected + 1);
 	};
 
-	// ページネーションの範囲を計算
-	const offset = currentPage * perPage;
-
-	//現在のページに表示すべき記事の配列
-	const currentArticles = articles.slice(offset, offset + perPage);
-
 	// 記事一覧のデータを整形
-	const items = currentArticles.map((article) => ({
+	const items = articles.map((article) => ({
 		title: article.title,
 		thumbnail: article.imageUrl,
 		createdAt: article.createdAt,
@@ -77,7 +98,7 @@ function ArticleList(_props: any) {
 			{/*ページネーション*/}
 			<div className="flex justify-center items-center py-8 ">
 				<ReactPaginate
-					pageCount={Math.ceil(articles.length / perPage)}
+					pageCount={Math.ceil(totalCount / perPage)}
 					marginPagesDisplayed={2}
 					pageRangeDisplayed={5}
 					onPageChange={handlePageChange}

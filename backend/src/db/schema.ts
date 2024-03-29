@@ -8,7 +8,5 @@ export const ArticleSchema = sqliteTable("articles", {
 	title: text("title").notNull(),
 	content: text("content").notNull(),
 	imageUrl: text("image_url").notNull(),
-	createdAt: integer("created_at", { mode: "timestamp" })
-		.default(sql`CURRENT_TIMESTAMP`)
-		.notNull(),
+	createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
 });

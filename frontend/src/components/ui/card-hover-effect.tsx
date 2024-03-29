@@ -93,7 +93,7 @@ export const CardDescription = ({
 				className,
 			)}
 		>
-			2024/03/25{children}
+			{children}
 		</p>
 	);
 };
