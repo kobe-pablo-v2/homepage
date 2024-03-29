@@ -21,15 +21,18 @@ app.get("/hello", (c) => {
 // 記事一覧を取得する
 app.get("/articles", async (c) => {
 	const db = drizzle(c.env.DB);
-	// 初期値はページ1、1ページあたりの表示数は6
 	const { page = 1, perPage = 6 } = c.req.query();
 
-	// ページ数からoffset(ページ内の1番目)とlimit(ページ内の6番目)を計算
 	const offset = (Number(page) - 1) * Number(perPage);
 	const limit = Number(perPage);
 
 	const result = await db
-		.select()
+		.select({
+			id: ArticleSchema.id,
+			title: ArticleSchema.title,
+			imageUrl: ArticleSchema.imageUrl,
+			createdAt: ArticleSchema.createdAt,
+		})
 		.from(ArticleSchema)
 		.offset(offset)
 		.limit(limit)
