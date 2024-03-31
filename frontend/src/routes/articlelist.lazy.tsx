@@ -16,11 +16,18 @@ interface Article {
 	createdAt: string;
 }
 
-// 記事の一覧を取得する page = 表示しているページ perPage = 1ページあたりの表示数
-async function fetchData(page: number, perPage: number): Promise<Article[]> {
+// 記事の一覧と総数を取得する
+// page = 表示しているページ
+// perPage = 1ページあたりの表示数
+async function fetchData(
+	page: number,
+	perPage: number,
+): Promise<{ articles: Article[]; total: number }> {
 	try {
 		const response = await fetch(
-			`http://127.0.0.1:8787/articles?page=${page}&perPage=${perPage}`,
+			`${
+				import.meta.env.VITE_ARTICLELIST_URL
+			}/articles?page=${page}&perPage=${perPage}`,
 			{
 				method: "GET",
 				headers: {
@@ -29,32 +36,16 @@ async function fetchData(page: number, perPage: number): Promise<Article[]> {
 			},
 		);
 		if (response.ok) {
-			return await response.json();
-		}
-		throw new Error("Request failed");
-	} catch (error) {
-		console.error(error);
-		return [];
-	}
-}
-
-// 記事の総数を取得する
-async function fetchTotalCount(): Promise<number> {
-	try {
-		const response = await fetch("http://127.0.0.1:8787/articles/count", {
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json",
-			},
-		});
-		if (response.ok) {
 			const data = await response.json();
-			return data.total;
+			return {
+				articles: data.articles,
+				total: data.total,
+			};
 		}
 		throw new Error("Request failed");
 	} catch (error) {
 		console.error(error);
-		return 0;
+		return { articles: [], total: 0 };
 	}
 }
 
@@ -66,13 +57,11 @@ function ArticleList(_props: any) {
 	// 1ページあたりの表示数
 	const perPage = 6;
 
-	// ページ読み込み時に記事一覧を取得
+	// ページ読み込み時に記事一覧と総数を取得
 	useEffect(() => {
 		fetchData(currentPage, perPage).then((data) => {
-			setArticles(data);
-		});
-		fetchTotalCount().then((count) => {
-			setTotalCount(count);
+			setArticles(data.articles);
+			setTotalCount(data.total);
 		});
 	}, [currentPage]);
 
