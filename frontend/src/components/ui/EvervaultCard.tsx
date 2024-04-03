@@ -28,20 +28,20 @@ export const EvervaultCard = ({
 		mouseX.set(clientX - left);
 		mouseY.set(clientY - top);
 
-		const str = generateRandomString(10000);
+		const str = generateRandomString(20000);
 		setRandomString(str);
 	}
 
 	return (
 		<div
 			className={cn(
-				"p-0.5  bg-transparent aspect-square flex items-center justify-center w-full h-full relative",
+				"bg-transparent aspect-square flex items-center justify-center w-full h-full relative",
 				className,
 			)}
 		>
 			<div
 				onMouseMove={onMouseMove}
-				className="group/card rounded-3xl w-full relative overflow-hidden bg-transparent flex flex-col items-center justify-center h-full"
+				className="group/card w-full relative overflow-hidden bg-transparent flex flex-col items-center justify-center h-full"
 			>
 				<CardPattern
 					mouseX={mouseX}
