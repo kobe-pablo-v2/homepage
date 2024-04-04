@@ -7,10 +7,10 @@ export const Header = () => {
 				pablo
 			</Link>
 			<div className="ml-auto">
-				<Link to="/articleList" className="mr-24 ml-4 text-sm">
+				<Link to="/articleList" className="mr-24 ml-4 text-sm hover:underline">
 					ACTIVITIES
 				</Link>
-				<Link to="/contact" className="text-sm">
+				<Link to="/contact" className="text-sm hover:underline">
 					CONTACT
 				</Link>
 			</div>
