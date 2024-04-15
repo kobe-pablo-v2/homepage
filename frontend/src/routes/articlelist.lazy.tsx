@@ -49,7 +49,7 @@ async function fetchData(
 	}
 }
 
-function ArticleList(_props: any) {
+function ArticleList() {
 	const [articles, setArticles] = useState<Article[]>([]);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [totalCount, setTotalCount] = useState(0);
@@ -93,14 +93,14 @@ function ArticleList(_props: any) {
 					onPageChange={handlePageChange}
 					containerClassName="inline-flex space-x-2"
 					pageClassName="mx-2"
-					pageLinkClassName="px-3 py-2 border-zinc-400 text-zinc-400 hover:bg-zinc-400 hover:text-black focus:outline-none"
-					activeClassName="border-b-2 border-zinc-400"
+					pageLinkClassName="px-3 py-2 border-white text-white hover:bg-white hover:text-black focus:outline-none"
+					activeClassName="border-b border-white"
 					previousLabel="PREV"
 					nextLabel="NEXT"
 					previousClassName="mx-2"
 					nextClassName="mx-2"
-					previousLinkClassName="px-3 py-2 text-zinc-400 hover:bg-zinc-400 hover:text-black focus:outline-none rounded-lg"
-					nextLinkClassName="px-3 py-2 text-zinc-400 hover:bg-zinc-400 hover:text-black focus:outline-none rounded-lg"
+					previousLinkClassName="px-3 py-2 text-white hover:bg-white hover:text-black focus:outline-none rounded-lg"
+					nextLinkClassName="px-3 py-2 text-white hover:bg-white hover:text-black focus:outline-none rounded-lg"
 					disabledClassName="opacity-50 cursor-not-allowed"
 					breakLabel="..."
 					breakClassName="mx-2"

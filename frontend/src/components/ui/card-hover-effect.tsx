@@ -16,6 +16,15 @@ export const HoverEffect = ({
 }) => {
 	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
+	const formatDate = (dateString: string) => {
+		const options: Intl.DateTimeFormatOptions = {
+			year: "numeric",
+			month: "long",
+			day: "numeric",
+		};
+		return new Date(dateString).toLocaleDateString(undefined, options);
+	};
+
 	return (
 		<div
 			className={cn(
@@ -49,7 +58,7 @@ export const HoverEffect = ({
 					</AnimatePresence>
 					<Card>
 						<img src={item.thumbnail} alt={item.title} />
-						<CardDescription>{item.createdAt}</CardDescription>
+						<CardDescription>{formatDate(item.createdAt)}</CardDescription>
 						<CardTitle>{item.title}</CardTitle>
 					</Card>
 				</div>
@@ -87,12 +96,7 @@ export const CardDescription = ({
 	children: React.ReactNode;
 }) => {
 	return (
-		<p
-			className={cn(
-				"mt-8 text-zinc-400 tracking-wide leading-relaxed text-sm",
-				className,
-			)}
-		>
+		<p className={cn("mt-8 tracking-wide leading-relaxed text-xs", className)}>
 			{children}
 		</p>
 	);

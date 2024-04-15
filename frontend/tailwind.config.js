@@ -11,6 +11,9 @@ export default {
 	],
 	theme: {
 		extend: {},
+		fontFamily: {
+      audiowide: ['Audiowide', 'ui-serif']
+    }
 	},
 	plugins: [],
 };
